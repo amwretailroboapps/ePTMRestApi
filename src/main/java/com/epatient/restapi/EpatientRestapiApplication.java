@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EpatientRestapiApplication {
 		
 	public static void main(String[] args) {
-		//testing changes
+		//main class to run
 		SpringApplication.run(EpatientRestapiApplication.class, args);
 	}
 
