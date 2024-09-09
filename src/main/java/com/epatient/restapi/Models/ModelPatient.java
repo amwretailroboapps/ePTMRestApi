@@ -3,6 +3,8 @@ package com.epatient.restapi.Models;
 import jakarta.persistence.*;
 import java.util.Date;
 
+//import org.hibernate.annotations.Entity;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name = "patients")
@@ -14,7 +16,7 @@ public class ModelPatient {
    //@SequenceGenerator(name = "paitents_panumber_seq", sequenceName = "paitents_panumber_seq", allocationSize = 1)
     @Column(name = "pnumber")
     String	pnumber 	;
-    @Column(name = "adhaar_number")
+    @Column(name="adhaar_number")
     String	adhaar_number 	;
     @Column(name = "prefix")
     String	prefix 	;
