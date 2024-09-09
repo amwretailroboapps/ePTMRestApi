@@ -1,4 +1,4 @@
-package com.epatient.restapi.epatient_restapi.Exception;
+package com.epatient.restapi.Exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -1,14 +1,11 @@
-package com.epatient.restapi.epatient_restapi.Controller;
+package com.epatient.restapi.Controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.RequestEntity.BodyBuilder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.epatient.restapi.epatient_restapi.Exception.ResourceNotFoundException;
-import com.epatient.restapi.epatient_restapi.Models.ModelPatient;
-import com.epatient.restapi.epatient_restapi.Models.ModelSequence;
-import com.epatient.restapi.epatient_restapi.Repository.PatientRepository;
+import com.epatient.restapi.Exception.ResourceNotFoundException;
+import com.epatient.restapi.Models.ModelPatient;
+import com.epatient.restapi.Repository.PatientRepository;
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController

@@ -1,4 +1,4 @@
-package com.epatient.restapi.epatient_restapi.Models;
+package com.epatient.restapi.Models;
 
 import jakarta.persistence.*;
 import java.util.Date;

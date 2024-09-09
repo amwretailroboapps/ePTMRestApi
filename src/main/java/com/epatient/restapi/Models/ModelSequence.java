@@ -1,4 +1,4 @@
-package com.epatient.restapi.epatient_restapi.Models;
+package com.epatient.restapi.Models;
 
 public class ModelSequence {
     String NewPatientNumber;
