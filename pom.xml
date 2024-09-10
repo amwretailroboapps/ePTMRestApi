@@ -27,12 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	    <java.version>17</java.version>
-	    <maven.compiler.source>${java.version}</maven.compiler.source>
-	    <maven.compiler.target>${java.version}</maven.compiler.target>
-	    <sap.cloud.security.version>3.0.1</sap.cloud.security.version>
-		<spring.profiles.active>dev</spring.profiles.active>
 	</properties>
 	<dependencies>
 		<dependency>
