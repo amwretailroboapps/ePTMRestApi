@@ -52,18 +52,22 @@ public class ModelPatient {
     String state;
     @Column(name = "country")
     String country;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    @Column(name = "registrDate")
+    Date	registrDate 	;
+    
+    //system columns
     @Column(name = "created")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     Date	created 	;
+    @Column(name = "created_by")
+    int	created_by 	;
     @Column(name = "updated")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     Date	updated 	;
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-    Date	registrDate 	;
-    @Column(name = "created_by")
-    int	created_by 	;
     @Column(name = "updated_by")
     int	updated_by 	;
+
     // @Lob
     // private byte[] userImage;
 

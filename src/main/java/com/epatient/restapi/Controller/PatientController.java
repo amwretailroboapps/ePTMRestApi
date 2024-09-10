@@ -29,7 +29,7 @@ public class PatientController {
 	
 	// get all Patient
 	@GetMapping("/patients")
-	public List<ModelPatient> getAllEmployees(){
+	public List<ModelPatient> getAllPatients(){
 		return patientRepository.findAll();
 	}	
 
