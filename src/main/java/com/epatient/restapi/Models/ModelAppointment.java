@@ -8,7 +8,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name = "patients")
-public class ModelAppointments {
+public class ModelAppointment {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     int	sys_id 	;
@@ -82,7 +82,7 @@ public class ModelAppointments {
 	 * @param created_by
 	 * @param updated_by
 	 */
-	public ModelAppointments(int sys_id, String appt_number, String appt_date, String appt_time, String appt_message,
+	public ModelAppointment(int sys_id, String appt_number, String appt_date, String appt_time, String appt_message,
 			String apply_date, String remarks, String status, int doctor_id, String specialization, int pat_id,
 			String pat_name, String pat_mobile, String pat_whatsapp, String pat_email, Date created, Date updated,
 			Date registrDate, int created_by, int updated_by) {
@@ -269,7 +269,7 @@ public class ModelAppointments {
 		this.registrDate = registrDate;
 	}
 
-    public ModelAppointments()
+    public ModelAppointment()
     {}
 
     
