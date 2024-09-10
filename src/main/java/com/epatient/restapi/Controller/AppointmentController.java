@@ -30,15 +30,15 @@ public class AppointmentController {
 	private AppointmentsRepository appointmentRepository;
 	
 	// get all Patient
-	@GetMapping("/appointment")
+	@GetMapping("/appointments")
 	public List<ModelAppointments> getAllAppointments(){
 		return appointmentRepository.findAll();
 	}	
 
     // create Patient rest api
 	@PostMapping("/appointment/create")
-	public ModelAppointments createappointment(@RequestBody ModelAppointments addPayloadPatient) {
-		return appointmentRepository.save(addPayloadPatient);
+	public ModelAppointments createappointment(@RequestBody ModelAppointments addRecordPayload) {
+		return appointmentRepository.save(addRecordPayload);
 	}
 
 	// get Patient by id rest api

@@ -1,5 +1,6 @@
 package com.epatient.restapi.Controller;
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import com.epatient.restapi.Exception.ResourceNotFoundException;
 import com.epatient.restapi.Models.ModelPatient;
 import com.epatient.restapi.Repository.PatientRepository;
 
+//@GetMapping("/patients/getnewpanumber", produces = MediaType.APPLICATION_JSON_VALUE)
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1/")
@@ -35,8 +37,8 @@ public class PatientController {
 
     // create Patient rest api
 	@PostMapping("/patients/create")
-	public ModelPatient createPatient(@RequestBody ModelPatient addPayloadPatient) {
-		return patientRepository.save(addPayloadPatient);
+	public ModelPatient createPatient(@RequestBody ModelPatient addRecordPayload) {
+		return patientRepository.save(addRecordPayload);
 	}
 
     // get Patient by id rest api
@@ -47,7 +49,6 @@ public class PatientController {
 		return ResponseEntity.ok(patient);
 	}
     // get Patient by id rest api
-	//@GetMapping("/patients/getnewpanumber", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(value = "/patients/getnewpanumber", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getNewPatientNumber() {
 		List<String> patient = patientRepository.getNewPatientNumber();
@@ -61,34 +62,33 @@ public class PatientController {
 
     // update Patient rest api
 	@PutMapping("/patients/{id}")
-	public ResponseEntity<ModelPatient> updatePatient(@PathVariable Integer id, @RequestBody ModelPatient updatePayloadPatient){
+	public ResponseEntity<ModelPatient> updatePatient(@PathVariable Integer id, @RequestBody ModelPatient updatedRecordPayload){
 		ModelPatient patient = patientRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
-		
-                patient.setAddress(updatePayloadPatient.getAddress());
-                patient.setAdhaar_number(updatePayloadPatient.getAdhaar_number());
-                patient.setAge(updatePayloadPatient.getAge());
-                patient.setCity(updatePayloadPatient.getCity());
-                patient.setCountry(updatePayloadPatient.getCountry());
-                patient.setCreated(updatePayloadPatient.getCreated());
-                patient.setCreated_by(updatePayloadPatient.getCreated_by());
-                patient.setDob(updatePayloadPatient.getDob());
-                patient.setEmail(updatePayloadPatient.getEmail());
-                patient.setEmergency_contact(updatePayloadPatient.getEmergency_contact());
-                patient.setFirst_name(updatePayloadPatient.getFirst_name());
-                patient.setGender(updatePayloadPatient.getGender());
-                patient.setLast_name(updatePayloadPatient.getLast_name());
-                patient.setMarital_status(updatePayloadPatient.getMarital_status());
-                patient.setMobile(updatePayloadPatient.getMobile());
-                patient.setOccupation(updatePayloadPatient.getOccupation());
-                patient.setPnumber(updatePayloadPatient.getPnumber());
-                patient.setPrefix(updatePayloadPatient.getPrefix());
-                patient.setState(updatePayloadPatient.getState());
-                patient.setUpdated(updatePayloadPatient.getUpdated());
-                patient.setUpdated_by(updatePayloadPatient.getUpdated_by());
-                patient.setWhatsapp(updatePayloadPatient.getWhatsapp());
-		ModelPatient updatedEmployee = patientRepository.save(patient);
-		return ResponseEntity.ok(updatedEmployee);
+		                patient.setAddress(updatedRecordPayload.getAddress());
+                patient.setAdhaar_number(updatedRecordPayload.getAdhaar_number());
+                patient.setAge(updatedRecordPayload.getAge());
+                patient.setCity(updatedRecordPayload.getCity());
+                patient.setCountry(updatedRecordPayload.getCountry());
+                patient.setCreated(updatedRecordPayload.getCreated());
+                patient.setCreated_by(updatedRecordPayload.getCreated_by());
+                patient.setDob(updatedRecordPayload.getDob());
+                patient.setEmail(updatedRecordPayload.getEmail());
+                patient.setEmergency_contact(updatedRecordPayload.getEmergency_contact());
+                patient.setFirst_name(updatedRecordPayload.getFirst_name());
+                patient.setGender(updatedRecordPayload.getGender());
+                patient.setLast_name(updatedRecordPayload.getLast_name());
+                patient.setMarital_status(updatedRecordPayload.getMarital_status());
+                patient.setMobile(updatedRecordPayload.getMobile());
+                patient.setOccupation(updatedRecordPayload.getOccupation());
+                patient.setPnumber(updatedRecordPayload.getPnumber());
+                patient.setPrefix(updatedRecordPayload.getPrefix());
+                patient.setState(updatedRecordPayload.getState());
+                patient.setUpdated(updatedRecordPayload.getUpdated());
+                patient.setUpdated_by(updatedRecordPayload.getUpdated_by());
+                patient.setWhatsapp(updatedRecordPayload.getWhatsapp());
+		ModelPatient updatedRecord = patientRepository.save(patient);
+		return ResponseEntity.ok(updatedRecord);
 	}
 
     // delete Patient rest api
