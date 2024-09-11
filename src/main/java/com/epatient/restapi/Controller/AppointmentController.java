@@ -65,7 +65,7 @@ public class AppointmentController {
 	@PutMapping("/appointment/{id}")
 	public ResponseEntity<ModelAppointment> updateAppointment(@PathVariable Integer id, @RequestBody ModelAppointment updatePayloadRecord){
 		ModelAppointment update = appointmentRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));	
+				.orElseThrow(() -> new ResourceNotFoundException("Appointment not exist with id :" + id));	
 //                update.setAddress(updatePayloadRecord.getAddress());
 //                update.setAdhaar_number(updatePayloadRecord.getAdhaar_number());
 //                update.setAge(updatePayloadRecord.getAge());

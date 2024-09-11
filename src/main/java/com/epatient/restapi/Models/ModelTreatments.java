@@ -7,7 +7,7 @@ import java.util.Date;
 //new file updated
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
-@Table(name = "patients")
+@Table(name = "treatments")
 public class ModelTreatments {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
