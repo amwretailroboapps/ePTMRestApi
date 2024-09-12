@@ -68,7 +68,6 @@ public class ModelPatient {
     @Column(name = "updated_by")
     int	updated_by 	;
     @Column(name = "userImage")
-    @Lob
     private byte[] userImage;
 
     public ModelPatient()
