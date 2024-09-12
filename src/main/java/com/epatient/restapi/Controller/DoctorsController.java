@@ -49,17 +49,17 @@ public class DoctorsController {
 		return ResponseEntity.ok(record);
 	}
 	
-    // get Appointment by id rest api
-//    @RequestMapping(value = "/appointment/getappointmentnumber", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//	public ResponseEntity<String> getNewAppointmentNumber() {
-//		List<String> patient = doctorRepository.getNewAppointmentNumber();
-//        String panumber = "-1";
-//        if(patient.size() > 0)
-//        {
-//            panumber = patient.get(0);
-//        }
-//		return ResponseEntity.ok(panumber);
-//	}
+    // get Doctor by id rest api
+    @RequestMapping(value = "/doctor/fungetdocnewnumber", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getNewDoctorNumber() {
+		List<String> record = doctorRepository.fungetdocnewnumber();
+        String recnumber = "-1";
+        if(record.size() > 0)
+        {
+        	recnumber = record.get(0);
+        }
+		return ResponseEntity.ok(recnumber);
+	}
 
     // update Doctor rest api
 	@PutMapping("/doctor/{id}")
