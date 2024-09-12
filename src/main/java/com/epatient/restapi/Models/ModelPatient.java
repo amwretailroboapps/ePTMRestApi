@@ -73,8 +73,8 @@ public class ModelPatient {
     int	updated_by 	;
     
     
-    @Column(name = "userImage", columnDefinition = "BYTEA")
-    private byte[] userImage;
+//    @Column(name = "userImage", columnDefinition = "BYTEA")
+//    private byte[] userImage;
 
     public ModelPatient()
     {}
@@ -112,8 +112,9 @@ public class ModelPatient {
 			String full_name, String last_name, String gender, Date dob, String mobile, String whatsapp,
 			String marital_status, String email, String address, String age, String occupation,
 			String emergency_contact, String area, String city, String state, String country, Date registrDate,
-			Date created, int created_by, Date updated, int updated_by, byte[] userImage) {
+			Date created, int created_by, Date updated, int updated_by ) {
 		super();
+		//byte[] userImage
 		this.sys_id = sys_id;
 		this.pnumber = pnumber;
 		this.adhaar_number = adhaar_number;
@@ -140,7 +141,7 @@ public class ModelPatient {
 		this.created_by = created_by;
 		this.updated = updated;
 		this.updated_by = updated_by;
-		this.userImage = userImage;
+		//this.userImage = userImage;
 	}
 
 	public String getFull_name() {
@@ -167,13 +168,13 @@ public class ModelPatient {
 		this.registrDate = registrDate;
 	}
 
-	public byte[] getUserImage() {
-		return userImage;
-	}
-
-	public void setUserImage(byte[] userImage) {
-		this.userImage = userImage;
-	}
+//	public byte[] getUserImage() {
+//		return userImage;
+//	}
+//	public void setUserImage(byte[] userImage) {
+//		this.userImage = userImage;
+//	}
+	
     public String getCountry() {
         return country;
     }
