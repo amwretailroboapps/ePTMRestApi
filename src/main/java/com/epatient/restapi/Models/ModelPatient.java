@@ -233,13 +233,6 @@ public class ModelPatient {
         this.first_name = first_name;
     }
 
-    public String getfull_name() {
-        return full_name;
-    }
-    public void setfull_name(String full_name) {
-        this.full_name = full_name;
-    }
-
     public String getLast_name() {
         return last_name;
     }
