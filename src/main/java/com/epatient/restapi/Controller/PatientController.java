@@ -40,8 +40,9 @@ public class PatientController {
 
     // create Patient rest api
 	@PostMapping("/patients/create")
-	public ResponseEntity<ModelPatient> createPatient(@RequestBody ModelPatient createRecordPayload, MultipartFile userImage) throws IOException {
-		createRecordPayload.setUserImage(userImage.getBytes());
+	public ResponseEntity<ModelPatient> createPatient(@RequestBody ModelPatient createRecordPayload) throws IOException {
+		//, MultipartFile userImage
+		//createRecordPayload.setUserImage(userImage.getBytes());
 		return ResponseEntity.ok(patientRepository.save(createRecordPayload));
 	}
 
