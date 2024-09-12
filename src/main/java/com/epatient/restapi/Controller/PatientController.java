@@ -37,7 +37,7 @@ public class PatientController {
 	@GetMapping("/patients")
 	public List<ModelPatient> getAllPatients(){
 		//return patientRepository.findAll(Sort.by(Dec));
-        return patientRepository.findAll();
+        return patientRepository.findAll(Sort.by("pnumber").descending());
 	}	
 
     // create Patient rest api
