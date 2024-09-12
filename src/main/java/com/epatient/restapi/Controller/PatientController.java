@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +36,8 @@ public class PatientController {
 	// get all Patient
 	@GetMapping("/patients")
 	public List<ModelPatient> getAllPatients(){
-		return patientRepository.findAll();
+		//return patientRepository.findAll(Sort.by(Dec));
+        return patientRepository.findAll(Sort.by("sys_id").descending());
 	}	
 
     // create Patient rest api
@@ -44,7 +46,8 @@ public class PatientController {
 		//, MultipartFile userImage
 		//createRecordPayload.setUserImage(userImage.getBytes());
 		ModelPatient added = patientRepository.save(createRecordPayload);
-		return ResponseEntity.ok(String.valueOf(added.getSys_id()));	
+		return ResponseEntity.ok(String.valueOf(added.getSys_id()));
+			
 	}
 
     // get Patient by id rest api
