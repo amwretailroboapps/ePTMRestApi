@@ -1,4 +1,5 @@
 package com.epatient.restapi.Controller;
+import java.io.IOException;
 import java.util.HashMap;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpServerErrorException.InternalServerError;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.epatient.restapi.Exception.ResourceNotFoundException;
 import com.epatient.restapi.Models.ModelPatient;
@@ -38,7 +40,8 @@ public class PatientController {
 
     // create Patient rest api
 	@PostMapping("/patients/create")
-	public ResponseEntity<ModelPatient> createPatient(@RequestBody ModelPatient createRecordPayload) throws InternalServerError {
+	public ResponseEntity<ModelPatient> createPatient(@RequestBody ModelPatient createRecordPayload, MultipartFile userImage) throws IOException {
+		createRecordPayload.setUserImage(userImage.getBytes());
 		return ResponseEntity.ok(patientRepository.save(createRecordPayload));
 	}
 

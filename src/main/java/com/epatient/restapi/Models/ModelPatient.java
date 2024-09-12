@@ -1,17 +1,12 @@
 package com.epatient.restapi.Models;
 
 import jakarta.persistence.*;
-
-import java.sql.Types;
 import java.util.Date;
-
-import org.hibernate.annotations.JdbcTypeCode;
-
 //import org.hibernate.annotations.Entity;
 //new file updated
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
+
 
 @Entity
 @Table(name = "patients")
@@ -76,8 +71,9 @@ public class ModelPatient {
     Date	updated 	;
     @Column(name = "updated_by")
     int	updated_by 	;
-    @Lob
-    @Column(name = "userImage")
+    
+    
+    @Column(name = "userImage", columnDefinition = "BYTEA")
     private byte[] userImage;
 
     public ModelPatient()
