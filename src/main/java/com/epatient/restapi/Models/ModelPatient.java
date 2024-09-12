@@ -10,6 +10,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 //import org.hibernate.annotations.Entity;
 //new file updated
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 @Entity
@@ -28,9 +29,9 @@ public class ModelPatient {
     String	prefix 	;
     @Column(name = "first_name")
     String	first_name 	;
-    @Column(name = "last_name")
-    String	full_name 	;
     @Column(name = "full_name")
+    String	full_name 	;
+    @Column(name = "last_name")
     String	last_name 	;
     @Column(name = "gender")
     String	gender 	;
@@ -74,8 +75,7 @@ public class ModelPatient {
     @Column(name = "updated_by")
     int	updated_by 	;
     
-    @JdbcTypeCode(Types.BINARY)
-    //@Type(name="org.hibernate.type.BinaryType")
+    @Lob
     @Column(name = "userImage")
     private byte[] userImage;
 
