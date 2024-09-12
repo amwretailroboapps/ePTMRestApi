@@ -67,14 +67,14 @@ public class ModelPatient {
     Date	updated 	;
     @Column(name = "updated_by")
     int	updated_by 	;
-
-    // @Lob
-    // private byte[] userImage;
+    @Column(name = "userImage")
+    @Lob
+    private byte[] userImage;
 
     public ModelPatient()
     {}
 
-    public ModelPatient(int sys_id, Date registrDate, String pnumber, String adhaar_number, String prefix, String first_name, String last_name, String full_name, String gender, Date dob, String mobile, String whatsapp, String marital_status, String email, String address, String age, String occupation, Date created, Date updated, int created_by, int updated_by, String emergency_contact, String city, String state, String country) {
+    public ModelPatient(int sys_id, Date registrDate, String pnumber, String adhaar_number, String prefix, String first_name, String last_name, String full_name, String gender, Date dob, String mobile, String whatsapp, String marital_status, String email, String address, String age, String occupation, Date created, Date updated, int created_by, int updated_by, String emergency_contact, String city, String state, String country, byte[] userImage) {
         super();
         this.sys_id = sys_id;
         this.pnumber = pnumber;
@@ -101,14 +101,15 @@ public class ModelPatient {
         this.city = city;
         this.state = state;
         this.country = country;
+        this.userImage = userImage;
     }
-    // public byte[] getImage() {
-    //     return userImage;
-    // }
+     public byte[] getImage() {
+         return userImage;
+     }
 
-    // public void setImage(byte[] userImage) {
-    //     this.userImage = userImage;
-    // }
+     public void setImage(byte[] userImage) {
+         this.userImage = userImage;
+     }
     public String getCountry() {
         return country;
     }

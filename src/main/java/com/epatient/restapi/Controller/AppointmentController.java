@@ -1,4 +1,5 @@
 package com.epatient.restapi.Controller;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class AppointmentController {
     // create Patient rest api
 	@PostMapping("/appointment/create")
 	public ModelAppointment createappointment(@RequestBody ModelAppointment addRecordPayload) {
-		return appointmentRepository.save(addRecordPayload);
+			return appointmentRepository.save(addRecordPayload);        
 	}
 
 	// get Patient by id rest api
