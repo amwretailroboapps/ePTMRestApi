@@ -50,7 +50,7 @@ public class DoctorsController {
 	}
 	
     // get Doctor by id rest api
-    @RequestMapping(value = "/doctor/fungetdocnewnumber", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/doctor/getdocnewnumber", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getNewDoctorNumber() {
 		List<String> record = doctorRepository.fungetdocnewnumber();
         String recnumber = "-1";
