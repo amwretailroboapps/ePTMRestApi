@@ -37,8 +37,10 @@ public class PatientController {
 
     // create Patient rest api
 	@PostMapping("/patients/create")
-	public ModelPatient createPatient(@RequestBody ModelPatient addRecordPayload) {
-		return patientRepository.save(addRecordPayload);
+	public ResponseEntity<ModelPatient> createPatient(@RequestBody ModelPatient addRecordPayload) {
+		
+		return ResponseEntity.ok(patientRepository.save(addRecordPayload));
+		//return 
 	}
 
     // get Patient by id rest api

@@ -53,7 +53,9 @@ public class ModelPatient {
     String	occupation 	;
     @Column(name = "emergency_contact")
     String emergency_contact;
-    @Column(name = "city")
+    @Column(name = "area")
+    String        area;
+	@Column(name = "city")
     String        city;
     @Column(name = "state")
     String state;
@@ -74,7 +76,6 @@ public class ModelPatient {
     Date	updated 	;
     @Column(name = "updated_by")
     int	updated_by 	;
-    
     @Lob
     @Column(name = "userImage")
     private byte[] userImage;
@@ -82,42 +83,101 @@ public class ModelPatient {
     public ModelPatient()
     {}
 
-    public ModelPatient(int sys_id, Date registrDate, String pnumber, String adhaar_number, String prefix, String first_name, String last_name, String full_name, String gender, Date dob, String mobile, String whatsapp, String marital_status, String email, String address, String age, String occupation, Date created, Date updated, int created_by, int updated_by, String emergency_contact, String city, String state, String country, byte[] userImage) {
-        super();
-        this.sys_id = sys_id;
-        this.pnumber = pnumber;
-        this.registrDate = registrDate;
-        this.adhaar_number = adhaar_number;
-        this.prefix = prefix;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.full_name = full_name;
-        this.gender = gender;
-        this.dob = dob;
-        this.mobile = mobile;
-        this.whatsapp = whatsapp;
-        this.marital_status = marital_status;
-        this.email = email;
-        this.address = address;
-        this.age = age;
-        this.occupation = occupation;
-        this.created = created;
-        this.updated = updated;
-        this.created_by = created_by;
-        this.updated_by = updated_by;
-        this.emergency_contact = emergency_contact;
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.userImage = userImage;
-    }
-     public byte[] getImage() {
-         return userImage;
-     }
+    /**
+	 * @param sys_id
+	 * @param pnumber
+	 * @param adhaar_number
+	 * @param prefix
+	 * @param first_name
+	 * @param full_name
+	 * @param last_name
+	 * @param gender
+	 * @param dob
+	 * @param mobile
+	 * @param whatsapp
+	 * @param marital_status
+	 * @param email
+	 * @param address
+	 * @param age
+	 * @param occupation
+	 * @param emergency_contact
+	 * @param area
+	 * @param city
+	 * @param state
+	 * @param country
+	 * @param registrDate
+	 * @param created
+	 * @param created_by
+	 * @param updated
+	 * @param updated_by
+	 * @param userImage
+	 */
+	public ModelPatient(int sys_id, String pnumber, String adhaar_number, String prefix, String first_name,
+			String full_name, String last_name, String gender, Date dob, String mobile, String whatsapp,
+			String marital_status, String email, String address, String age, String occupation,
+			String emergency_contact, String area, String city, String state, String country, Date registrDate,
+			Date created, int created_by, Date updated, int updated_by, byte[] userImage) {
+		super();
+		this.sys_id = sys_id;
+		this.pnumber = pnumber;
+		this.adhaar_number = adhaar_number;
+		this.prefix = prefix;
+		this.first_name = first_name;
+		this.full_name = full_name;
+		this.last_name = last_name;
+		this.gender = gender;
+		this.dob = dob;
+		this.mobile = mobile;
+		this.whatsapp = whatsapp;
+		this.marital_status = marital_status;
+		this.email = email;
+		this.address = address;
+		this.age = age;
+		this.occupation = occupation;
+		this.emergency_contact = emergency_contact;
+		this.area = area;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.registrDate = registrDate;
+		this.created = created;
+		this.created_by = created_by;
+		this.updated = updated;
+		this.updated_by = updated_by;
+		this.userImage = userImage;
+	}
 
-     public void setImage(byte[] userImage) {
-         this.userImage = userImage;
-     }
+	public String getFull_name() {
+		return full_name;
+	}
+
+	public void setFull_name(String full_name) {
+		this.full_name = full_name;
+	}
+
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
+	}
+
+	public Date getRegistrDate() {
+		return registrDate;
+	}
+
+	public void setRegistrDate(Date registrDate) {
+		this.registrDate = registrDate;
+	}
+
+	public byte[] getUserImage() {
+		return userImage;
+	}
+
+	public void setUserImage(byte[] userImage) {
+		this.userImage = userImage;
+	}
     public String getCountry() {
         return country;
     }
