@@ -43,11 +43,8 @@ public class PatientController {
 	public ResponseEntity<String> createPatient(@RequestBody ModelPatient createRecordPayload) {
 		//, MultipartFile userImage
 		//createRecordPayload.setUserImage(userImage.getBytes());
-		if(patientRepository.save(createRecordPayload).getSys_id() > 0)
-		{
-			return ResponseEntity.ok("RecordAdded");	
-		}
-		return null;
+		ModelPatient added = patientRepository.save(createRecordPayload);
+		return ResponseEntity.ok(String.valueOf(added.getSys_id()));	
 	}
 
     // get Patient by id rest api
