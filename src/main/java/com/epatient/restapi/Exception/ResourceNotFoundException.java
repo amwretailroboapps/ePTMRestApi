@@ -12,3 +12,13 @@ public class ResourceNotFoundException extends RuntimeException{
 		super(message);
 	}
 }
+
+@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+ class InternalServerError extends RuntimeException{
+
+	private static final long serialVersionUID = 1L;
+	
+	public InternalServerError(String message) {
+		super(message);
+	}
+}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import com.epatient.restapi.Exception.ResourceNotFoundException;
 import com.epatient.restapi.Models.ModelPatient;
@@ -37,10 +38,8 @@ public class PatientController {
 
     // create Patient rest api
 	@PostMapping("/patients/create")
-	public ResponseEntity<ModelPatient> createPatient(@RequestBody ModelPatient createRecordPayload) {
-		
+	public ResponseEntity<ModelPatient> createPatient(@RequestBody ModelPatient createRecordPayload) throws InternalServerError {
 		return ResponseEntity.ok(patientRepository.save(createRecordPayload));
-		//return 
 	}
 
     // get Patient by id rest api
