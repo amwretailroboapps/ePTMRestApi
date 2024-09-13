@@ -1,4 +1,4 @@
-package com.epatient.restapi.Controller;
+package com.epatient.restapi.Controllers;
 import java.io.IOException;
 import java.util.HashMap;
 

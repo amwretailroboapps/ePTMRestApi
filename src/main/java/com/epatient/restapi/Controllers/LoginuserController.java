@@ -1,11 +1,10 @@
-package com.epatient.restapi.Controller;
+package com.epatient.restapi.Controllers;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,57 +13,48 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.epatient.restapi.Exception.ResourceNotFoundException;
-import com.epatient.restapi.Models.ModelDoctors;
-import com.epatient.restapi.Repository.DoctorsRepository;
+import com.epatient.restapi.Models.ModelAppLoginUser;
+import com.epatient.restapi.Repository.AppLoginuserRepository;
+import com.epatient.restapi.Service.LoginuserService;
 
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/v1/")
-public class DoctorsController {
+public class LoginuserController {
     @Autowired
-	private DoctorsRepository doctorRepository;
+	private AppLoginuserRepository loginuserRepository;
+    private LoginuserService loginuserService;
 	
 	// get all Patient
-	@GetMapping("/doctors")
-	public List<ModelDoctors> getAllDoctors(){
-		return doctorRepository.findAll();
+	@GetMapping("/loginusers")
+	public List<ModelAppLoginUser> getAllUserLogin(){
+		return loginuserRepository.findAll();
 	}	
 
     // create Patient rest api
-	@PostMapping("/doctor/create")
-	public ModelDoctors createappointment(@RequestBody ModelDoctors addRecordPayload) {
-			return doctorRepository.save(addRecordPayload);        
+	@PostMapping("/userlogin/create")
+	public ModelAppLoginUser createuserlogin(@RequestBody ModelAppLoginUser addRecordPayload) {
+			return loginuserRepository.save(addRecordPayload);        
 	}
 
 	// get Patient by id rest api
-	@GetMapping("/doctor/{id}")
-	public ResponseEntity<ModelDoctors> getAppointmentById(@PathVariable Integer id) {
-		ModelDoctors record = doctorRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("doctor profile not exist with System Id :" + id));
+	@GetMapping("/loginusers/{id}")
+	public ResponseEntity<ModelAppLoginUser> getUserloginById(@PathVariable Integer id) {
+		ModelAppLoginUser record = loginuserRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("login profile not exist with System Id :" + id));
 		return ResponseEntity.ok(record);
 	}
 	
-    // get Doctor by id rest api
-    @RequestMapping(value = "/doctor/getdocnewnumber", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> getNewDoctorNumber() {
-		List<String> record = doctorRepository.fungetdocnewnumber();
-        String recnumber = "-1";
-        if(record.size() > 0)
-        {
-        	recnumber = record.get(0);
-        }
-		return ResponseEntity.ok(recnumber);
-	}
 
     // update Doctor rest api
-	@PutMapping("/doctor/{id}")
-	public ResponseEntity<ModelDoctors> updateAppointment(@PathVariable Integer id, @RequestBody ModelDoctors updatePayloadRecord){
-		ModelDoctors update = doctorRepository.findById(id)
+	@PutMapping("/loginusers/{id}")
+	public ResponseEntity<ModelAppLoginUser> updateUserLogin(@PathVariable Integer id, @RequestBody ModelAppLoginUser updatePayloadRecord){
+		ModelAppLoginUser update = loginuserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("doctor profile not exist with id :" + id));	
 //                update.setAddress(updatePayloadRecord.getAddress());
 //                update.setAdhaar_number(updatePayloadRecord.getAdhaar_number());
@@ -88,20 +78,26 @@ public class DoctorsController {
 //                update.setUpdated(updatePayloadRecord.getUpdated());
 //                update.setUpdated_by(updatePayloadRecord.getUpdated_by());
 //                update.setWhatsapp(updatePayloadRecord.getWhatsapp());
-		ModelDoctors updatedRecord = doctorRepository.save(update);
+		ModelAppLoginUser updatedRecord = loginuserRepository.save(update);
 		return ResponseEntity.ok(updatedRecord);
 	}
 
     // delete Patient rest api
-    @DeleteMapping("/doctor/{id}")
+    @DeleteMapping("/loginusers/{id}")
     public ResponseEntity<Map<String, Boolean>> deletePatient(@PathVariable Integer id){
-    	ModelDoctors patient = doctorRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("doctor profile not exist with id :" + id));
-        
-        doctorRepository.delete(patient);
+    	ModelAppLoginUser patient = loginuserRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("login user profile not exist with id :" + id));
+    	loginuserRepository.delete(patient);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
-
+    @GetMapping("/loginusers/search")
+    public ResponseEntity<List<ModelAppLoginUser>> searchUserByUsernameOrEmail(@RequestParam String input) {
+        List<ModelAppLoginUser> users = loginuserRepository.findByUsernameOrMobile(input);
+        if (users.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(users);
+    }
 }
