@@ -32,21 +32,26 @@ public class LoginuserController {
 	private AppLoginuserRepository loginuserRepository;
     private LoginuserService loginuserService;
 	
-	// get all Patient
+	// get all AppUsers
 	@GetMapping("/loginusers")
-	public List<ModelAppLoginUser> getAllUserLogin(){
+	public List<ModelAppLoginUser> getAllLoginUser(){
 		return loginuserRepository.findAll();
+	}	
+	
+	@GetMapping("/loginusers/loginrequest")
+	public List<ModelAppLoginUser> getAllLoginUserRequest(){
+		return loginuserRepository.getAllAppsLoginUserRequest();
 	}	
 
     // create Patient rest api
 	@PostMapping("/loginusers/create")
-	public ModelAppLoginUser createuserlogin(@RequestBody ModelAppLoginUser addRecordPayload) {
+	public ModelAppLoginUser createloginuser(@RequestBody ModelAppLoginUser addRecordPayload) {
 			return loginuserRepository.save(addRecordPayload);        
 	}
 
 	// get Patient by id rest api
 	@GetMapping("/loginusers/{id}")
-	public ResponseEntity<ModelAppLoginUser> getUserloginById(@PathVariable Integer id) {
+	public ResponseEntity<ModelAppLoginUser> getLoginuserById(@PathVariable Integer id) {
 		ModelAppLoginUser record = loginuserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("login profile not exist with System Id :" + id));
 		return ResponseEntity.ok(record);
@@ -55,7 +60,7 @@ public class LoginuserController {
 
     // update Doctor rest api
 	@PutMapping("/loginusers/{id}")
-	public ResponseEntity<ModelAppLoginUser> updateUserLogin(@PathVariable Integer id, @RequestBody ModelAppLoginUser updatePayloadRecord){
+	public ResponseEntity<ModelAppLoginUser> updateLoinguser(@PathVariable Integer id, @RequestBody ModelAppLoginUser updatePayloadRecord){
 		ModelAppLoginUser update = loginuserRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("doctor profile not exist with id :" + id));	
 //                update.setAddress(updatePayloadRecord.getAddress());
@@ -86,7 +91,7 @@ public class LoginuserController {
 
     // delete Patient rest api
     @DeleteMapping("/loginusers/{id}")
-    public ResponseEntity<Map<String, Boolean>> deletePatient(@PathVariable Integer id){
+    public ResponseEntity<Map<String, Boolean>> deleteLoginuser(@PathVariable Integer id){
     	ModelAppLoginUser patient = loginuserRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("login user profile not exist with id :" + id));
     	loginuserRepository.delete(patient);
