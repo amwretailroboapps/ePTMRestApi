@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ModelDoctors {
     /**
 	 * @param sys_id
+	 * @param docasst_number
 	 * @param adhaar_number
 	 * @param prefix
 	 * @param first_name
@@ -30,11 +31,12 @@ public class ModelDoctors {
 	
 	public ModelDoctors()
 	{}
-	public ModelDoctors(int sys_id, String adhaar_number, String prefix, String first_name, String last_name,
+	public ModelDoctors(int sys_id, String docasst_number,String adhaar_number, String prefix, String first_name, String last_name,
 			String gender, String dob, String mobile, String whatsapp, String email, String specialization,
 			boolean status, Date created, int created_by, Date updated, int updated_by) {
 		super();
 		this.sys_id = sys_id;
+		this.docasst_number = docasst_number;
 		this.adhaar_number = adhaar_number;
 		this.prefix = prefix;
 		this.first_name = first_name;
@@ -54,7 +56,10 @@ public class ModelDoctors {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     int	sys_id 	;
-    @Column(name = "adhaar_number")
+	@Column(name = "docasst_number")
+    String	docasst_number 	;
+
+	@Column(name = "adhaar_number")
     String	adhaar_number 	;
     @Column(name="prefix")
     String	prefix 	;
@@ -278,6 +283,18 @@ public class ModelDoctors {
 	 */
 	public void setUpdated_by(int updated_by) {
 		this.updated_by = updated_by;
+	}
+    /**
+	 * @return the docasst_number
+	 */
+	public String getDocasst_number() {
+		return docasst_number;
+	}
+	/**
+	 * @param docasst_number the docasst_number to set
+	 */
+	public void setDocasst_number(String docasst_number) {
+		this.docasst_number = docasst_number;
 	}
     
     

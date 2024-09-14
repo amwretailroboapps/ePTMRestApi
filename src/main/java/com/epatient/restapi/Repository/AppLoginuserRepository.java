@@ -1,6 +1,7 @@
 package com.epatient.restapi.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,7 @@ public interface AppLoginuserRepository   extends JpaRepository<ModelAppLoginUse
 	//List<ModelLoginuser> findByUsernameOrMobile(String input);
 	
 	@Query(value ="SELECT u FROM ModelAppLoginUser u WHERE u.username = :input OR u.mobile = :input")
-    List<ModelAppLoginUser> findByUsernameOrMobile(@Param("input") String input);
+    List<ModelAppLoginUser> findByUsernameOrMobile(@Param("input") String username);
+	
+//	Optional<ModelAppLoginUser> findByUsernameAndStatus(String username, String loginStatus);
 }

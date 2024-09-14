@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +39,7 @@ public class LoginuserController {
 	}	
 
     // create Patient rest api
-	@PostMapping("/userlogin/create")
+	@PostMapping("/loginusers/create")
 	public ModelAppLoginUser createuserlogin(@RequestBody ModelAppLoginUser addRecordPayload) {
 			return loginuserRepository.save(addRecordPayload);        
 	}
@@ -96,8 +98,9 @@ public class LoginuserController {
     public ResponseEntity<List<ModelAppLoginUser>> searchUserByUsernameOrEmail(@RequestParam String input) {
         List<ModelAppLoginUser> users = loginuserRepository.findByUsernameOrMobile(input);
         if (users.isEmpty()) {
-            return ResponseEntity.notFound().build();
+        	return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(users);
     }
+
 }
