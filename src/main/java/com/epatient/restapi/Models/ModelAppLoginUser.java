@@ -23,11 +23,12 @@ public class ModelAppLoginUser
 	public ModelAppLoginUser()
 	{}
 	
-	public ModelAppLoginUser(int sys_id, String username, String password, String mobile, String pin, String role_name,
+	public ModelAppLoginUser(int sys_id, String username,String email, String password, String mobile, String pin, String role_name,
 			boolean status, Date created, int created_by, Date updated, int updated_by) {
 		super();
 		this.sys_id = sys_id;
 		this.username = username;
+		this.email = email;
 		this.password = password;
 		this.mobile = mobile;
 		this.pin = pin;
@@ -47,6 +48,22 @@ public class ModelAppLoginUser
 	@Column(name="username")
     private String username;
 	
+	@Column(name="email")
+    private String email;
+	
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	//@Column(nullable = false)
 	@Column(name="password")
     private String password;
