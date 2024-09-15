@@ -110,6 +110,7 @@ public class LoginuserController {
         	 return ResponseEntity.ok(user);
         } else {
             // Passwords don't match, return error
+        	user = null;
         	user.setLastresponse("Invalid Pin is entered.");
             return ResponseEntity.ok(user);
         }
