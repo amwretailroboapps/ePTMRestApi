@@ -14,7 +14,7 @@ public interface AppLoginuserRepository   extends JpaRepository<ModelAppLoginUse
 	//List<ModelLoginuser> findByUsernameOrMobile(String input);
 	
 	@Query(value ="SELECT u FROM ModelAppLoginUser u WHERE u.username = :input OR u.mobile = :input")
-    ModelAppLoginUser findByUsernameOrMobile(@Param("input") String username,@Param("passcode") String pasCode);
+    ModelAppLoginUser findByUsernameOrMobile(@Param("input") String username);
 	
 	@Query(value ="SELECT u FROM ModelAppLoginUser u WHERE u.status = false OR u.role_name = 'Requested'")
     List<ModelAppLoginUser> getAllAppsLoginUserRequest();

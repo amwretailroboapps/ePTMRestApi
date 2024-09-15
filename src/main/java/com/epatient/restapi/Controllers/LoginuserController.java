@@ -101,7 +101,7 @@ public class LoginuserController {
     }
     @GetMapping("/loginusers/search")
     public ResponseEntity<ModelAppLoginUser> searchUserByUsernameOrEmail(@RequestParam String input, @RequestParam String passcode) {
-        ModelAppLoginUser user = loginuserRepository.findByUsernameOrMobile(input, passcode);
+        ModelAppLoginUser user = loginuserRepository.findByUsernameOrMobile(input);
         if (user == null) {
         	return ResponseEntity.notFound().build();
         }
