@@ -16,8 +16,8 @@ public class LoginuserService {
 	@Autowired
     private AppLoginuserRepository userRepository;
 
-    public List<ModelAppLoginUser> searchByUsernameOrMobile(@RequestParam("input") String input) {
-        return userRepository.findByUsernameOrMobile(input);
+    public ModelAppLoginUser searchByUsernameOrMobile(@RequestParam("input") String input, @RequestParam("input") String passCode) {
+        return userRepository.findByUsernameOrMobile(input, passCode);
     }
 //    public boolean isAppLoingUserActive(String username) {
 //        Optional<ModelAppLoginUser> user = userRepository.findByUsernameAndStatus(username, "active");

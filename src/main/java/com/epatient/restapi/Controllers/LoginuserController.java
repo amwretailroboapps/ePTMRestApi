@@ -100,12 +100,19 @@ public class LoginuserController {
         return ResponseEntity.ok(response);
     }
     @GetMapping("/loginusers/search")
-    public ResponseEntity<List<ModelAppLoginUser>> searchUserByUsernameOrEmail(@RequestParam String input) {
-        List<ModelAppLoginUser> users = loginuserRepository.findByUsernameOrMobile(input);
-        if (users.isEmpty()) {
+    public ResponseEntity<ModelAppLoginUser> searchUserByUsernameOrEmail(@RequestParam String input, @RequestParam String passCode) {
+        ModelAppLoginUser user = loginuserRepository.findByUsernameOrMobile(input, passCode);
+        if (user == null) {
         	return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(users);
+        else if (user != null && user.getPin().equals(passCode)) {
+            // Passwords match, return success
+        	 return ResponseEntity.ok(user);
+        } else {
+            // Passwords don't match, return error
+        	user.setLastresponse("Invalid Pin is entered.");
+            return ResponseEntity.ok(user);
+        }
     }
 
 }

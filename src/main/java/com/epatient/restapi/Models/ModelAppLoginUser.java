@@ -15,6 +15,7 @@ public class ModelAppLoginUser
 	 * @param pin
 	 * @param role_name
 	 * @param status
+	 * @param lastresponse
 	 * @param created
 	 * @param created_by
 	 * @param updated
@@ -24,7 +25,7 @@ public class ModelAppLoginUser
 	{}
 	
 	public ModelAppLoginUser(int sys_id, String username,String email, String password, String mobile, String pin, String role_name,
-			boolean status, Date created, int created_by, Date updated, int updated_by) {
+			boolean status,String lastresponse, Date created, int created_by, Date updated, int updated_by) {
 		super();
 		this.sys_id = sys_id;
 		this.username = username;
@@ -34,6 +35,7 @@ public class ModelAppLoginUser
 		this.pin = pin;
 		this.role_name = role_name;
 		this.status = status;
+		this.lastresponse = lastresponse;
 		this.created = created;
 		this.created_by = created_by;
 		this.updated = updated;
@@ -83,6 +85,23 @@ public class ModelAppLoginUser
     //@Column(nullable = false)
     @Column(name="status")
     private boolean status;
+    
+    /**
+	 * @return the lastresponse
+	 */
+	public String getLastresponse() {
+		return lastresponse;
+	}
+
+	/**
+	 * @param lastresponse the lastresponse to set
+	 */
+	public void setLastresponse(String lastresponse) {
+		this.lastresponse = lastresponse;
+	}
+	@Column(name="lastresponse")
+    private String lastresponse;
+    
 	    
 	//system columns
     @Column(name = "created")
