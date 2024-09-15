@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,8 +47,11 @@ public class LoginuserController {
 
     // create Patient rest api
 	@PostMapping("/loginusers/create")
-	public ModelAppLoginUser createloginuser(@RequestBody ModelAppLoginUser addRecordPayload) {
-			return loginuserRepository.save(addRecordPayload);        
+	public ResponseEntity<ModelAppLoginUser> createloginuser(@RequestBody ModelAppLoginUser addRecordPayload) 
+	{
+		ModelAppLoginUser useradded =  loginuserRepository.save(addRecordPayload);
+		return ResponseEntity.ok(useradded);
+		
 	}
 
 	// get Patient by id rest api
@@ -110,9 +115,9 @@ public class LoginuserController {
         	 return ResponseEntity.ok(user);
         } else {
             // Passwords don't match, return error
-        	user = null;
-        	user.setLastresponse("Invalid Pin is entered.");
-            return ResponseEntity.ok(user);
+        	ModelAppLoginUser errorUser = new ModelAppLoginUser();
+        	errorUser.setLastresponse("Invalid Pin is entered.");
+            return ResponseEntity.ok(errorUser);
         }
     }
 
