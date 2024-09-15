@@ -100,12 +100,12 @@ public class LoginuserController {
         return ResponseEntity.ok(response);
     }
     @GetMapping("/loginusers/search")
-    public ResponseEntity<ModelAppLoginUser> searchUserByUsernameOrEmail(@RequestParam String input, @RequestParam String passCode) {
-        ModelAppLoginUser user = loginuserRepository.findByUsernameOrMobile(input, passCode);
+    public ResponseEntity<ModelAppLoginUser> searchUserByUsernameOrEmail(@RequestParam String input, @RequestParam String passcode) {
+        ModelAppLoginUser user = loginuserRepository.findByUsernameOrMobile(input, passcode);
         if (user == null) {
         	return ResponseEntity.notFound().build();
         }
-        else if (user != null && user.getPin().equals(passCode)) {
+        else if (user != null && user.getPin().equals(passcode)) {
             // Passwords match, return success
         	 return ResponseEntity.ok(user);
         } else {
