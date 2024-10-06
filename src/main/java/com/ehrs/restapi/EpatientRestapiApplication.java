@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 //@ComponentScan
 //@EnableAutoConfiguration
 @SpringBootApplication
-public class EpatientRestapiApplication extends SpringBootServletInitializer{
-
+public class EpatientRestapiApplication {
+//extends SpringBootServletInitializer
 //	@GetMapping("/welcome")
 //	public String welcomeMessage()
 //	{
