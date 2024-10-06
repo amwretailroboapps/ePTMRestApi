@@ -10,5 +10,5 @@ import com.ehrs.restapi.Models.ModelAppointment;
 @Repository
 public interface AppointmentsRepository   extends JpaRepository<ModelAppointment, Integer>{
 	 @Query(value = "select fungetappointnumber()")
-	    List<String> getNewAppointmentNumber();
+	   List<String> getNewAppointmentNumber();
 }

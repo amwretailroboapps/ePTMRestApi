@@ -1,5 +1,4 @@
 package com.ehrs.restapi.Controllers;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,15 +14,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
 import com.ehrs.restapi.Exception.DatabaseLogger;
 import com.ehrs.restapi.Exception.InternalServerErrorException;
 import com.ehrs.restapi.Exception.ResourceNotFoundException;
 import com.ehrs.restapi.Models.ModelAppointment;
-import com.ehrs.restapi.Models.ModelPatient;
 import com.ehrs.restapi.Repository.AppointmentsRepository;
-import com.ehrs.restapi.Repository.PatientRepository;
+
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController
@@ -73,11 +69,11 @@ public class AppointmentController  {
 	public ResponseEntity<String> getNewAppointmentNumber() {
     	try
     	{
-			List<String> patient = appointmentRepository.getNewAppointmentNumber();
+			List<String> record = appointmentRepository.getNewAppointmentNumber();
 	        String panumber = "-1";
-	        if(patient.size() > 0)
+	        if(record.size() > 0)
 	        {
-	            panumber = patient.getFirst();
+	            panumber = record.get(0).toString();
 	        }
 			return ResponseEntity.ok(panumber);
     	}

@@ -1,11 +1,8 @@
 package com.ehrs.restapi.Controllers;
-import java.io.IOException;
-import java.util.HashMap;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
@@ -18,9 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.ehrs.restapi.Exception.DatabaseLogger;
 import com.ehrs.restapi.Exception.InternalServerErrorException;
 import com.ehrs.restapi.Exception.ResourceNotFoundException;
@@ -88,13 +82,13 @@ public class PatientController {
     // get Patient by id rest api
     @GetMapping(value = "/patients/getnewpanumber", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> getNewPatientNumber() {
-		List<String> patient = patientRepository.getNewPatientNumber();
+		List<String> record = patientRepository.getNewPatientNumber();
 		try
 		{
 			String panumber = "-1";
-	        if(patient.size() > 0)
+	        if(record.size() > 0)
 	        {
-	            panumber = patient.getFirst();
+	            panumber = record.get(0).toString();
 	        }
 			return ResponseEntity.ok(panumber);	
 		}

@@ -83,7 +83,7 @@ public class DoctorController {
 	        String recnumber = "-1";
 	        if(record.size() > 0)
 	        {
-	        	recnumber = record.getFirst();
+	        	recnumber = record.get(0).toString();
 	        }
 			return ResponseEntity.ok(recnumber);
 		}
