@@ -1,4 +1,4 @@
-package com.epatient.restapi.Repository;
+package com.ehrs.restapi.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.epatient.restapi.Models.ModelAppLoginUser;
+import com.ehrs.restapi.Models.ModelAppLoginUser;
 @Repository
 public interface AppLoginuserRepository   extends JpaRepository<ModelAppLoginUser, Integer>{
 	//List<ModelLoginuser> findByUsernameOrMobile(String input);

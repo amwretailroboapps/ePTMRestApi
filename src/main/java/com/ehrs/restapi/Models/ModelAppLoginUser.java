@@ -1,4 +1,4 @@
-package com.epatient.restapi.Models;
+package com.ehrs.restapi.Models;
 
 import jakarta.persistence.*;
 import java.util.Date;
@@ -46,7 +46,6 @@ public class ModelAppLoginUser
 	@Column(name="sys_id")
     int	sys_id 	;
 	
-	//@Column(nullable = false, unique = true)
 	@Column(name="username")
     private String username;
 	
