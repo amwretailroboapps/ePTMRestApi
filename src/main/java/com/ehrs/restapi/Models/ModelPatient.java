@@ -59,7 +59,10 @@ public class ModelPatient {
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     @Column(name = "registrDate")
     Date	registrDate 	;
+    @Column(name = "photo_path")
+    String        photo_path;
     
+
     //system columns
     @Column(name = "created")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
@@ -102,6 +105,7 @@ public class ModelPatient {
 	 * @param state
 	 * @param country
 	 * @param registrDate
+	 * @param photo_path
 	 * @param created
 	 * @param created_by
 	 * @param updated
@@ -111,7 +115,7 @@ public class ModelPatient {
 	public ModelPatient(int sys_id, String pnumber, String adhaar_number, String prefix, String first_name,
 			String full_name, String last_name, String gender, Date dob, String mobile, String whatsapp,
 			String marital_status, String email, String address, String age, String occupation,
-			String emergency_contact, String area, String city, String state, String country, Date registrDate,
+			String emergency_contact, String area, String city, String state, String country, Date registrDate, String photo_path,
 			Date created, int created_by, Date updated, int updated_by ) {
 		super();
 		//byte[] userImage
@@ -137,6 +141,7 @@ public class ModelPatient {
 		this.state = state;
 		this.country = country;
 		this.registrDate = registrDate;
+		this.photo_path= photo_path;
 		this.created = created;
 		this.created_by = created_by;
 		this.updated = updated;
@@ -167,7 +172,7 @@ public class ModelPatient {
 	public void setRegistrDate(Date registrDate) {
 		this.registrDate = registrDate;
 	}
-
+	
 //	public byte[] getUserImage() {
 //		return userImage;
 //	}
@@ -175,7 +180,15 @@ public class ModelPatient {
 //		this.userImage = userImage;
 //	}
 	
-    public String getCountry() {
+    public String getPhoto_path() {
+		return photo_path;
+	}
+
+	public void setPhoto_path(String photo_path) {
+		this.photo_path = photo_path;
+	}
+
+	public String getCountry() {
         return country;
     }
     public void setCountry(String country) {

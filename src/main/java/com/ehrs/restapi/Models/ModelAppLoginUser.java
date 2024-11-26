@@ -1,17 +1,28 @@
 package com.ehrs.restapi.Models;
 
-import jakarta.persistence.*;
 import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+/**
+ *
+ */
 @Entity
 @Table(name = "loginusers")
-public class ModelAppLoginUser 
+public class ModelAppLoginUser
 {
 	/**
 	 * @param sys_id
 	 * @param username
 	 * @param password
 	 * @param mobile
+	 * @param device_id
 	 * @param pin
 	 * @param role_name
 	 * @param status
@@ -23,15 +34,16 @@ public class ModelAppLoginUser
 	 */
 	public ModelAppLoginUser()
 	{}
-	
-	public ModelAppLoginUser(int sys_id, String username,String email, String password, String mobile, String pin, String role_name,
-			boolean status,String lastresponse, Date created, int created_by, Date updated, int updated_by) {
+
+	public ModelAppLoginUser(int sys_id, String username,String email, String password, String mobile,String device_id, String pin, String role_name,
+			boolean status,String lastresponse, Date created, int created_by, Date updated, int updated_by, String current_status) {
 		super();
 		this.sys_id = sys_id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.mobile = mobile;
+		this.device_id = device_id;
 		this.pin = pin;
 		this.role_name = role_name;
 		this.status = status;
@@ -40,18 +52,29 @@ public class ModelAppLoginUser
 		this.created_by = created_by;
 		this.updated = updated;
 		this.updated_by = updated_by;
+		this.current_status = current_status;
 	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="sys_id")
     int	sys_id 	;
-	
+
 	@Column(name="username")
     private String username;
 	
+	@Column(name="current_status")
+    private String current_status;
+
+	public String getCurrent_status() {
+		return current_status;
+	}
+
+	public void setCurrent_status(String current_status) {
+		this.current_status = current_status;
+	}
 	@Column(name="email")
     private String email;
-	
+
 	/**
 	 * @return the email
 	 */
@@ -68,23 +91,26 @@ public class ModelAppLoginUser
 	//@Column(nullable = false)
 	@Column(name="password")
     private String password;
-	
+
 	//@Column(nullable = false, unique = true)
 	@Column(name="mobile")
     private String mobile;
-	
+
+	@Column(name="device_id")
+    private String device_id;
+
     //@Column(nullable = false)
     @Column(name="pin")
     private String pin;
-	
+
     //@Column(nullable = false)
     @Column(name="role_name")
     private String role_name;
-    
+
     //@Column(nullable = false)
     @Column(name="status")
     private boolean status;
-    
+
     /**
 	 * @return the lastresponse
 	 */
@@ -100,8 +126,8 @@ public class ModelAppLoginUser
 	}
 	@Column(name="lastresponse")
     private String lastresponse;
-    
-	    
+
+
 	//system columns
     @Column(name = "created")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
@@ -113,9 +139,9 @@ public class ModelAppLoginUser
     Date	updated 	;
     @Column(name = "updated_by")
     int	updated_by 	;
-    
-    
-    
+
+
+
 	/**
 	 * @return the sys_id
 	 */
@@ -164,6 +190,17 @@ public class ModelAppLoginUser
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
 	}
+
+
+
+	public String getDevice_id() {
+		return device_id;
+	}
+
+	public void setDevice_id(String device_id) {
+		this.device_id = device_id;
+	}
+
 	/**
 	 * @return the pin
 	 */
@@ -248,6 +285,6 @@ public class ModelAppLoginUser
 	public void setUpdated_by(int updated_by) {
 		this.updated_by = updated_by;
 	}
-    
-    
+
+
 }

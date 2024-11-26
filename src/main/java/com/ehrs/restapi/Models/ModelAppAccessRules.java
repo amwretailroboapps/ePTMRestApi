@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
-@Table(name = "AppAccessRules")
+@Table(name = "appaccess_rules")
 public class ModelAppAccessRules 
 {
 	/**
@@ -42,8 +42,7 @@ public class ModelAppAccessRules
 	@Column(name="sys_id")
     int	sys_id 	;
 	@Column(name="login_id")
-    int	login_id 	;
-	
+    int	login_id ;	
 	@Column(name="mobile")
     String	mobile 	;
 	@Column(name="role_name")
@@ -202,12 +201,5 @@ public class ModelAppAccessRules
 	 */
 	public void setLogin_id(int login_id) {
 		this.login_id = login_id;
-	}
-	    
-	
-    
-    
-   
-    
-    
+	}    
 }

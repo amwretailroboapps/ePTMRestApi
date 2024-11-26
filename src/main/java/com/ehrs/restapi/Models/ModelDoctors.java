@@ -9,56 +9,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name = "doctors")
 public class ModelDoctors {
-    /**
-	 * @param sys_id
-	 * @param docasst_number
-	 * @param adhaar_number
-	 * @param prefix
-	 * @param first_name
-	 * @param last_name
-	 * @param gender
-	 * @param dob
-	 * @param mobile
-	 * @param whatsapp
-	 * @param email
-	 * @param specialization
-	 * @param status
-	 * @param created
-	 * @param created_by
-	 * @param updated
-	 * @param updated_by
-	 */
 	
-	public ModelDoctors()
-	{}
-	public ModelDoctors(int sys_id, String docasst_number,String adhaar_number, String prefix, String first_name, String last_name,
-			String gender, String dob, String mobile, String whatsapp, String email, String specialization,
-			boolean status, Date created, int created_by, Date updated, int updated_by) {
-		super();
-		this.sys_id = sys_id;
-		this.docasst_number = docasst_number;
-		this.adhaar_number = adhaar_number;
-		this.prefix = prefix;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.gender = gender;
-		this.dob = dob;
-		this.mobile = mobile;
-		this.whatsapp = whatsapp;
-		this.email = email;
-		this.specialization = specialization;
-		this.status = status;
-		this.created = created;
-		this.created_by = created_by;
-		this.updated = updated;
-		this.updated_by = updated_by;
-	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     int	sys_id 	;
 	@Column(name = "docasst_number")
     String	docasst_number 	;
-
 	@Column(name = "adhaar_number")
     String	adhaar_number 	;
     @Column(name="prefix")
@@ -81,6 +37,23 @@ public class ModelDoctors {
     String	specialization 	;
     @Column(name = "status")
     boolean	status 	;    
+    @Column(name = "marital_status")
+    String	marital_status 	;
+    @Column(name = "emergency_contact")
+    String emergency_contact;
+    @Column(name = "area")
+    String area;
+    @Column(name = "address")
+    String	address 	;
+    @Column(name = "city")
+    String city;
+    @Column(name = "state")
+    String state;
+    @Column(name = "country")
+    String country;
+    @Column(name = "photo_path")
+    String        photo_path;
+    
     //system columns
     @Column(name = "created")
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
@@ -92,6 +65,120 @@ public class ModelDoctors {
     Date	updated 	;
     @Column(name = "updated_by")
     int	updated_by 	;
+	
+    /**
+	 * @param sys_id
+	 * @param docasst_number
+	 * @param adhaar_number
+	 * @param prefix
+	 * @param first_name
+	 * @param last_name
+	 * @param gender
+	 * @param dob
+	 * @param mobile
+	 * @param whatsapp
+	 * @param email
+	 * @param specialization
+	 * @param status
+	 * emergency_contact
+	 * @param area
+	 * @param address
+	 * @param city
+	 * @param state
+	 * @param country
+	 * @param photo_path
+	 * @param created
+	 * @param created_by
+	 * @param updated
+	 * @param updated_by
+	 */
+	
+	public ModelDoctors()
+	{}
+	
+	public ModelDoctors(int sys_id, String docasst_number, String adhaar_number, String prefix, String first_name,
+			String last_name, String gender, String dob, String mobile, String whatsapp, String email,
+			String specialization, boolean status, String marital_status, String emergency_contact, String area,
+			String address, String city, String state, String country, String photo_path, Date created, int created_by, Date updated,
+			int updated_by) {
+		super();
+		this.sys_id = sys_id;
+		this.docasst_number = docasst_number;
+		this.adhaar_number = adhaar_number;
+		this.prefix = prefix;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.gender = gender;
+		this.dob = dob;
+		this.mobile = mobile;
+		this.whatsapp = whatsapp;
+		this.email = email;
+		this.specialization = specialization;
+		this.status = status;
+		this.marital_status = marital_status;
+		this.emergency_contact = emergency_contact;
+		this.area = area;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.photo_path = photo_path;
+		this.created = created;
+		this.created_by = created_by;
+		this.updated = updated;
+		this.updated_by = updated_by;
+	}
+
+	public String getPhoto_path() {
+		return photo_path;
+	}
+
+	public void setPhoto_path(String photo_path) {
+		this.photo_path = photo_path;
+	}
+    public String getMarital_status() {
+		return marital_status;
+	}
+	public void setMarital_status(String marital_status) {
+		this.marital_status = marital_status;
+	}
+	public String getEmergency_contact() {
+		return emergency_contact;
+	}
+	public void setEmergency_contact(String emergency_contact) {
+		this.emergency_contact = emergency_contact;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	
 	/**
 	 * @return the sys_id
 	 */

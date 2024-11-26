@@ -30,13 +30,13 @@ import com.ehrs.restapi.Service.LoginuserService;
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/ehrs_almeezan/api/v1")
 public class LoginuserController {
     @Autowired
 	private AppLoginuserRepository loginuserRepository;
     private LoginuserService loginuserService;
 	
-	// get all AppUsers
+	// get all apploginuser
 	@GetMapping("/loginusers")
 	public List<ModelAppLoginUser> getAllRecords(){
 		try
@@ -63,7 +63,7 @@ public class LoginuserController {
 		}
 	}	
 
-    // create Patient rest api
+    // create apploginuser rest api
 	@PostMapping("/loginusers/create")
 	public ResponseEntity<ModelAppLoginUser> createNewRecord(@RequestBody ModelAppLoginUser addRecordPayload) 
 	{
@@ -79,44 +79,73 @@ public class LoginuserController {
 		}
 	}
 
-	// get Patient by id rest api
+	// get apploginuser by id rest api
 	@GetMapping("/loginusers/{id}")
 	public ResponseEntity<ModelAppLoginUser> getRecordById(@PathVariable Integer id) {
 		ModelAppLoginUser record = loginuserRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("getLoginuserById/loginusers/{id}","login profile not exist with System Id :" + id));
 		return ResponseEntity.ok(record);
 	}
 	
-    // update Doctor rest api
+    // update apploginuser rest api
 	@PutMapping("/loginusers/{id}")
-	public ResponseEntity<ModelAppLoginUser> updateRecordById(@PathVariable Integer id, @RequestBody ModelAppLoginUser updatePayloadRecord){
+	public ResponseEntity<ModelAppLoginUser> updateRecordById(@PathVariable Integer id, @RequestBody ModelAppLoginUser updateRecordPayload){
 		ModelAppLoginUser update = loginuserRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("updateLoinguser/loginusers/{id}","login profile not exist with id :" + id));
 		try
 		{
-			if (updatePayloadRecord.getEmail() != null) {
-				update.setEmail(updatePayloadRecord.getEmail());
+			if (updateRecordPayload.getEmail() != null) {
+				update.setEmail(updateRecordPayload.getEmail());
 			}
-			if (updatePayloadRecord.getLastresponse() != null) {
-				update.setLastresponse(updatePayloadRecord.getLastresponse());
+			if (updateRecordPayload.getLastresponse() != null) {
+				update.setLastresponse(updateRecordPayload.getLastresponse());
 			}
-			if (updatePayloadRecord.getMobile() != null) {
-				update.setMobile(updatePayloadRecord.getMobile());
+			
+			if (updateRecordPayload.getDevice_id() != null) {
+				update.setDevice_id(updateRecordPayload.getDevice_id());
 			}
-			if (updatePayloadRecord.getPassword() != null) {
-				update.setPassword(updatePayloadRecord.getPassword());
+			
+			if (updateRecordPayload.getMobile() != null) {
+				update.setMobile(updateRecordPayload.getMobile());
 			}
-			if (updatePayloadRecord.getPin() != null) {
-				update.setPin(updatePayloadRecord.getPin());
+			if (updateRecordPayload.getPassword() != null) {
+				update.setPassword(updateRecordPayload.getPassword());
 			}
-			if (updatePayloadRecord.getRole_name() != null) {
-				update.setRole_name(updatePayloadRecord.getRole_name());
+			if (updateRecordPayload.getPin() != null) {
+				update.setPin(updateRecordPayload.getPin());
 			}
-			if (updatePayloadRecord.getUsername() != null) {
-				update.setUsername(updatePayloadRecord.getUsername());
+			if (updateRecordPayload.getRole_name() != null) {
+				update.setRole_name(updateRecordPayload.getRole_name());
 			}
-	        update.setStatus(updatePayloadRecord.isStatus());       
+			if (updateRecordPayload.getUsername() != null) {
+				update.setUsername(updateRecordPayload.getUsername());
+			}
+			if (updateRecordPayload.getDevice_id() != null) {
+				update.setUsername(updateRecordPayload.getDevice_id());
+			}
+			if (updateRecordPayload.getCurrent_status() != null) {
+				update.setCurrent_status(updateRecordPayload.getCurrent_status());
+			}
+			
+			if (updateRecordPayload.isStatus() == false ) {
+				update.setStatus(false);
+			}
+			if (updateRecordPayload.isStatus() == true ) {
+				update.setStatus(true);
+			}
+			
+			if (updateRecordPayload.getCreated() != null) {
+				 update.setCreated(updateRecordPayload.getCreated());
+			} 
+			if (updateRecordPayload.getUpdated() != null) {
+				update.setUpdated(updateRecordPayload.getUpdated());
+			} 
 	        
-	        update.setUpdated(updatePayloadRecord.getUpdated());
-	        update.setUpdated_by(updatePayloadRecord.getUpdated_by());
+			if (updateRecordPayload.getUpdated_by() > 0) {
+				update.setUpdated_by(updateRecordPayload.getUpdated_by());
+			}
+			if (updateRecordPayload.getCreated_by() > 0) {
+				update.setCreated_by(updateRecordPayload.getCreated_by());
+			}        
+	        
 			ModelAppLoginUser updatedRecord = loginuserRepository.save(update);
 			return ResponseEntity.ok(updatedRecord);
 		}
@@ -127,7 +156,7 @@ public class LoginuserController {
 		}
 	}
 
-    // delete Patient rest api
+    // delete apploginuser rest api
     @DeleteMapping("/loginusers/{id}")
     public ResponseEntity<Map<String, Boolean>> deleteRecordById(@PathVariable Integer id){
     	ModelAppLoginUser patient = loginuserRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("deleteLoginuser/loginusers/{id}","login profile not exist with id :" + id));
@@ -168,5 +197,6 @@ public class LoginuserController {
 			throw new InternalServerErrorException("searchUserByUsernameOrEmail/loginusers","Error occurred while deleting the record.");
 		}       
     }
+    
 
 }

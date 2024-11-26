@@ -23,7 +23,7 @@ import com.ehrs.restapi.Repository.AppointmentsRepository;
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/ehrs_almeezan/api/v1/")
 public class AppointmentController  {
     @Autowired
 	private AppointmentsRepository appointmentRepository;
@@ -86,29 +86,39 @@ public class AppointmentController  {
 
     // update Appointment rest api
 	@PutMapping("/appointment/{id}")
-	public ResponseEntity<ModelAppointment> updateRecordById(@PathVariable Integer id, @RequestBody ModelAppointment updatePayloadRecord){
+	public ResponseEntity<ModelAppointment> updateRecordById(@PathVariable Integer id, @RequestBody ModelAppointment updateRecordPayload){
 		ModelAppointment update = appointmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("updateAppointment/appointment/{id}","Appointment not exist with id :" + id));
 		try
 		{
-            update.setApply_date(updatePayloadRecord.getApply_date());
-            update.setAppt_date(updatePayloadRecord.getAppt_date());
-            update.setAppt_message(updatePayloadRecord.getAppt_message());
-            update.setAppt_number(updatePayloadRecord.getAppt_number());
-            update.setAppt_time(updatePayloadRecord.getAppt_time());
-            update.setDoctor_id(updatePayloadRecord.getDoctor_id());
-            update.setPat_email(updatePayloadRecord.getPat_email());
-            update.setPat_id(updatePayloadRecord.getPat_id());
-            update.setPat_mobile(updatePayloadRecord.getPat_mobile());
-            update.setPat_name(updatePayloadRecord.getPat_name());
-            update.setPat_whatsapp(updatePayloadRecord.getPat_whatsapp());
-            update.setRegistrDate(updatePayloadRecord.getRegistrDate());
-            update.setRemarks(updatePayloadRecord.getRemarks());
-            update.setSpecialization(updatePayloadRecord.getSpecialization());
-            update.setStatus(updatePayloadRecord.getStatus());
-            update.setCreated(updatePayloadRecord.getCreated());
-            update.setCreated_by(updatePayloadRecord.getCreated_by());
-            update.setUpdated(updatePayloadRecord.getUpdated());
-            update.setUpdated_by(updatePayloadRecord.getUpdated_by());
+            update.setApply_date(updateRecordPayload.getApply_date());
+            update.setAppt_date(updateRecordPayload.getAppt_date());
+            update.setAppt_message(updateRecordPayload.getAppt_message());
+            update.setAppt_number(updateRecordPayload.getAppt_number());
+            update.setAppt_time(updateRecordPayload.getAppt_time());
+            update.setDoctor_id(updateRecordPayload.getDoctor_id());
+            update.setPat_email(updateRecordPayload.getPat_email());
+            update.setPat_id(updateRecordPayload.getPat_id());
+            update.setPat_mobile(updateRecordPayload.getPat_mobile());
+            update.setPat_name(updateRecordPayload.getPat_name());
+            update.setPat_whatsapp(updateRecordPayload.getPat_whatsapp());
+            update.setRegistrDate(updateRecordPayload.getRegistrDate());
+            update.setRemarks(updateRecordPayload.getRemarks());
+            update.setSpecialization(updateRecordPayload.getSpecialization());
+            update.setStatus(updateRecordPayload.getStatus());
+			
+			if (updateRecordPayload.getCreated() != null) {
+				 update.setCreated(updateRecordPayload.getCreated());
+			} 
+			if (updateRecordPayload.getUpdated() != null) {
+				update.setUpdated(updateRecordPayload.getUpdated());
+			} 
+	        
+			if (updateRecordPayload.getUpdated_by() > 0) {
+				update.setUpdated_by(updateRecordPayload.getUpdated_by());
+			}
+			if (updateRecordPayload.getCreated_by() > 0) {
+				update.setCreated_by(updateRecordPayload.getCreated_by());
+			}  
             ModelAppointment updatedRecord = appointmentRepository.save(update);
             return ResponseEntity.ok(updatedRecord);
 		}

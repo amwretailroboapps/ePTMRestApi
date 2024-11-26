@@ -7,7 +7,7 @@ import com.ehrs.restapi.Models.Log;
 import com.ehrs.restapi.Service.CustomLogService;
 
 @RestController
-@RequestMapping("/api/v1/logs")
+@RequestMapping("/ehrs_almeezan/api/v1/logs")
 public class LogController 
 {
 	 CustomLogService logService;

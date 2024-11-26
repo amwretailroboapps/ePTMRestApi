@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +16,17 @@ import com.ehrs.restapi.Exception.ResourceNotFoundException;
 import com.ehrs.restapi.Models.Log;
 import com.ehrs.restapi.Models.ModelAppAccessRules;
 import com.ehrs.restapi.Models.ModelDoctors;
+import com.ehrs.restapi.Models.ModelPatient;
 import com.ehrs.restapi.Repository.DoctorsRepository;
-import com.ehrs.restapi.Repository.RepositoryAppAccessRules;
+import com.ehrs.restapi.Repository.AppAccessRulesRepository;
 import com.ehrs.restapi.Service.CustomLogService;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/ehrs_almeezan/api/v1/")
 public class AppAccessRulesController 
 {
 	@Autowired
-	RepositoryAppAccessRules repositoryAppaccessrules; 
+	AppAccessRulesRepository repositoryAppaccessrules; 
 		
 	// get all doctors
 	@GetMapping("/appaccessrules")
@@ -40,6 +42,44 @@ public class AppAccessRulesController
 		}
 	}	
 
+	// get all app access rule by mobile name
+	@GetMapping("/appaccessrules/getaccesslistbymobile")
+	public List<ModelAppAccessRules> getAppAccessListByMobile(String mobile){
+		try
+		{
+			return repositoryAppaccessrules.getUserAppAccessRules(mobile);	
+		}
+		catch(Exception e)
+		{
+			DatabaseLogger.logToDatabase("/appaccessrules/getaccesslistbymobile", e.getMessage());
+			throw new InternalServerErrorException("getaccesslistbymobile/patients","Error occurred while getting the record.");
+		}  
+	}
+	
+	// get all app access rule by mobile name
+		@GetMapping("/appaccessrules/checkuserappaccessduplicatebyrole")
+		public boolean checkUserAppAccessDuplicateByRole(String mobile, String role_name){
+			try
+			{
+				List<ModelAppAccessRules> records = repositoryAppaccessrules.checkUserAppAccessDuplicateByRole(mobile, role_name);
+				
+				if(records.size() > 0)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+				 
+			}
+			catch(Exception e)
+			{
+				DatabaseLogger.logToDatabase("/appaccessrules/getaccesslistbymobile", e.getMessage());
+				throw new InternalServerErrorException("getaccesslistbymobile/patients","Error occurred while getting the record.");
+			}  
+		}
+	
     // create App Access Rules rest api
 	@PostMapping("/appaccessrules/create")
 	public ModelAppAccessRules createNewRecord(@RequestBody ModelAppAccessRules addRecordPayload) {
@@ -72,20 +112,30 @@ public class AppAccessRulesController
 
     // update updateappaccessruleById rest api
 	@PutMapping("/appaccessrules/{id}")
-	public ResponseEntity<ModelAppAccessRules> updateRecordById(@PathVariable Integer id, @RequestBody ModelAppAccessRules updatePayloadRecord){
+	public ResponseEntity<ModelAppAccessRules> updateRecordById(@PathVariable Integer id, @RequestBody ModelAppAccessRules updateRecordPayload){
 		ModelAppAccessRules update = repositoryAppaccessrules.findById(id).orElseThrow(() -> new ResourceNotFoundException("updateappaccessruleById/repositoryAppaccessrules/{id}", "doctor profile not exist with id :" + id));
 		try
 		{
                 update.setLastresponse(null);
-                update.setLogin_id(updatePayloadRecord.getLogin_id());
-                update.setMobile(updatePayloadRecord.getMobile());
-                update.setRole_name(updatePayloadRecord.getRole_name());
-                update.setStatus(updatePayloadRecord.isStatus());
+                update.setLogin_id(updateRecordPayload.getLogin_id());
+                update.setMobile(updateRecordPayload.getMobile());
+                update.setRole_name(updateRecordPayload.getRole_name());
+                update.setStatus(updateRecordPayload.isStatus());
                 //system column
-                update.setCreated(updatePayloadRecord.getCreated());
-                update.setCreated_by(updatePayloadRecord.getCreated_by());
-                update.setUpdated(updatePayloadRecord.getUpdated());
-                update.setUpdated_by(updatePayloadRecord.getUpdated_by());
+    			
+    			if (updateRecordPayload.getCreated() != null) {
+    				 update.setCreated(updateRecordPayload.getCreated());
+    			} 
+    			if (updateRecordPayload.getUpdated() != null) {
+    				update.setUpdated(updateRecordPayload.getUpdated());
+    			} 
+    	        
+    			if (updateRecordPayload.getUpdated_by() > 0) {
+    				update.setUpdated_by(updateRecordPayload.getUpdated_by());
+    			}
+    			if (updateRecordPayload.getCreated_by() > 0) {
+    				update.setCreated_by(updateRecordPayload.getCreated_by());
+    			}  
                 ModelAppAccessRules updatedRecord = repositoryAppaccessrules.save(update);
                 return ResponseEntity.ok(updatedRecord);
 		}

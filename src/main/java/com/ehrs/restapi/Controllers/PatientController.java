@@ -28,7 +28,7 @@ import com.ehrs.restapi.Repository.PatientRepository;
 //import com.ehrs.restapi.Repository.PatientRepository;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/ehrs_almeezan/api/v1")
 public class PatientController {
     @Autowired
 	private PatientRepository patientRepository;
@@ -128,6 +128,23 @@ public class PatientController {
 			update.setUpdated_by(updateRecordPayload.getUpdated_by());
 			update.setWhatsapp(updateRecordPayload.getWhatsapp());
 			update.setArea(updateRecordPayload.getArea());
+			update.setPhoto_path(updateRecordPayload.getPhoto_path());
+			//system columns
+			
+			if (updateRecordPayload.getCreated() != null) {
+				 update.setCreated(updateRecordPayload.getCreated());
+			} 
+			if (updateRecordPayload.getUpdated() != null) {
+				update.setUpdated(updateRecordPayload.getUpdated());
+			} 
+	        
+			if (updateRecordPayload.getUpdated_by() > 0) {
+				update.setUpdated_by(updateRecordPayload.getUpdated_by());
+			}
+			if (updateRecordPayload.getCreated_by() > 0) {
+				update.setCreated_by(updateRecordPayload.getCreated_by());
+			}  
+			
 			ModelPatient updatedRecord = patientRepository.save(update);
 			return ResponseEntity.ok(updatedRecord);
 		}

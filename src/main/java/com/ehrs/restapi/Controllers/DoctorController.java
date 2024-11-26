@@ -20,12 +20,13 @@ import com.ehrs.restapi.Exception.DatabaseLogger;
 import com.ehrs.restapi.Exception.InternalServerErrorException;
 import com.ehrs.restapi.Exception.ResourceNotFoundException;
 import com.ehrs.restapi.Models.ModelDoctors;
+import com.ehrs.restapi.Models.ModelPatient;
 import com.ehrs.restapi.Repository.DoctorsRepository;
 
 
 //@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/ehrs_almeezan/api/v1/")
 public class DoctorController {
     @Autowired
 	private DoctorsRepository doctorRepository;
@@ -46,10 +47,11 @@ public class DoctorController {
 
     // create Patient rest api
 	@PostMapping("/doctor/create")
-	public ModelDoctors createNewRecord(@RequestBody ModelDoctors addRecordPayload) {
+	public ResponseEntity<String> createNewRecord(@RequestBody ModelDoctors addRecordPayload) {
 		try
 		{
-			return doctorRepository.save(addRecordPayload);   
+			ModelDoctors added = doctorRepository.save(addRecordPayload);
+			return ResponseEntity.ok(String.valueOf(added.getSys_id()));	
 		}
 		catch(Exception e)
 		{
@@ -96,27 +98,74 @@ public class DoctorController {
 
     // update Doctor rest api
 	@PutMapping("/doctor/{id}")
-	public ResponseEntity<ModelDoctors> updateRecordById(@PathVariable Integer id, @RequestBody ModelDoctors updatePayloadRecord){
+	public ResponseEntity<ModelDoctors> updateRecordById(@PathVariable Integer id, @RequestBody ModelDoctors updateRecordPayload){
 		ModelDoctors update = doctorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("updatedoctorprofile/doctor/{id}", "doctor profile not exist with id :" + id));
 		try
 		{
-                update.setDocasst_number(updatePayloadRecord.getDocasst_number());
-                update.setAdhaar_number(updatePayloadRecord.getAdhaar_number());
-                update.setFirst_name(updatePayloadRecord.getFirst_name());
-                update.setLast_name(updatePayloadRecord.getLast_name());
-                update.setGender(updatePayloadRecord.getGender());
-                update.setDob(updatePayloadRecord.getDob());
-                update.setEmail(updatePayloadRecord.getEmail());
-                update.setPrefix(updatePayloadRecord.getPrefix());
-                update.setMobile(updatePayloadRecord.getMobile());
-                update.setWhatsapp(updatePayloadRecord.getWhatsapp());
-                update.setSpecialization(updatePayloadRecord.getSpecialization());
-                update.setStatus(updatePayloadRecord.isStatus());
+                update.setDocasst_number(updateRecordPayload.getDocasst_number());
+                update.setFirst_name(updateRecordPayload.getFirst_name());
+                update.setLast_name(updateRecordPayload.getLast_name());
+                update.setMobile(updateRecordPayload.getMobile());
+                update.setPrefix(updateRecordPayload.getPrefix());
+                update.setStatus(updateRecordPayload.isStatus());
+                
+                if (updateRecordPayload.getAdhaar_number() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getAdhaar_number());
+                }
+                if (updateRecordPayload.getGender() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getGender());
+                }
+                if (updateRecordPayload.getDob() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getDob());
+                }
+                if (updateRecordPayload.getEmail() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getEmail());
+                }
+                if (updateRecordPayload.getWhatsapp() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getWhatsapp());
+                }
+                if (updateRecordPayload.getSpecialization() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getSpecialization());
+                }
+                
+                if (updateRecordPayload.getMarital_status() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getMarital_status());
+                }
+                if (updateRecordPayload.getEmergency_contact() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getEmergency_contact());
+                }
+                if (updateRecordPayload.getArea() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getArea());
+                }
+                if (updateRecordPayload.getAddress() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getAddress());
+                }
+                if (updateRecordPayload.getCity() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getCity());
+                }
+                if (updateRecordPayload.getState() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getState());
+                }
+                if (updateRecordPayload.getCountry() != null) {
+                	update.setAdhaar_number(updateRecordPayload.getCountry());
+                }
+                if (updateRecordPayload.getPhoto_path() != null) {
+                	update.setPhoto_path(updateRecordPayload.getPhoto_path());
+                }
                 //system column
-                update.setCreated(updatePayloadRecord.getCreated());
-                update.setCreated_by(updatePayloadRecord.getCreated_by());
-                update.setUpdated(updatePayloadRecord.getUpdated());
-                update.setUpdated_by(updatePayloadRecord.getUpdated_by());
+    			if (updateRecordPayload.getCreated() != null) {
+    				 update.setCreated(updateRecordPayload.getCreated());
+    			} 
+    			if (updateRecordPayload.getUpdated() != null) {
+    				update.setUpdated(updateRecordPayload.getUpdated());
+    			} 
+    	        
+    			if (updateRecordPayload.getUpdated_by() > 0) {
+    				update.setUpdated_by(updateRecordPayload.getUpdated_by());
+    			}
+    			if (updateRecordPayload.getCreated_by() > 0) {
+    				update.setCreated_by(updateRecordPayload.getCreated_by());
+    			}  
                 ModelDoctors updatedRecord = doctorRepository.save(update);
                 return ResponseEntity.ok(updatedRecord);
 		}
