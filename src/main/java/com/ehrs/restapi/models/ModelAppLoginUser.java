@@ -1,0 +1,290 @@
+package com.ehrs.restapi.models;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+/**
+ *
+ */
+@Entity
+@Table(name = "loginusers")
+public class ModelAppLoginUser
+{
+	/**
+	 * @param sys_id
+	 * @param username
+	 * @param password
+	 * @param mobile
+	 * @param device_id
+	 * @param pin
+	 * @param role_name
+	 * @param status
+	 * @param lastresponse
+	 * @param created
+	 * @param created_by
+	 * @param updated
+	 * @param updated_by
+	 */
+	public ModelAppLoginUser()
+	{}
+
+	public ModelAppLoginUser(int sys_id, String username,String email, String password, String mobile,String device_id, String pin, String role_name,
+			boolean status,String lastresponse, Date created, int created_by, Date updated, int updated_by, String current_status) {
+		super();
+		this.sys_id = sys_id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.mobile = mobile;
+		this.device_id = device_id;
+		this.pin = pin;
+		this.role_name = role_name;
+		this.status = status;
+		this.lastresponse = lastresponse;
+		this.created = created;
+		this.created_by = created_by;
+		this.updated = updated;
+		this.updated_by = updated_by;
+		this.current_status = current_status;
+	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="sys_id")
+    int	sys_id 	;
+
+	@Column(name="username")
+    private String username;
+	
+	@Column(name="current_status")
+    private String current_status;
+
+	public String getCurrent_status() {
+		return current_status;
+	}
+
+	public void setCurrent_status(String current_status) {
+		this.current_status = current_status;
+	}
+	@Column(name="email")
+    private String email;
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	//@Column(nullable = false)
+	@Column(name="password")
+    private String password;
+
+	//@Column(nullable = false, unique = true)
+	@Column(name="mobile")
+    private String mobile;
+
+	@Column(name="device_id")
+    private String device_id;
+
+    //@Column(nullable = false)
+    @Column(name="pin")
+    private String pin;
+
+    //@Column(nullable = false)
+    @Column(name="role_name")
+    private String role_name;
+
+    //@Column(nullable = false)
+    @Column(name="status")
+    private boolean status;
+
+    /**
+	 * @return the lastresponse
+	 */
+	public String getLastresponse() {
+		return lastresponse;
+	}
+
+	/**
+	 * @param lastresponse the lastresponse to set
+	 */
+	public void setLastresponse(String lastresponse) {
+		this.lastresponse = lastresponse;
+	}
+	@Column(name="lastresponse")
+    private String lastresponse;
+
+
+	//system columns
+    @Column(name = "created")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    Date	created 	;
+    @Column(name = "created_by")
+    int	created_by 	;
+    @Column(name = "updated")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    Date	updated 	;
+    @Column(name = "updated_by")
+    int	updated_by 	;
+
+
+
+	/**
+	 * @return the sys_id
+	 */
+	public int getSys_id() {
+		return sys_id;
+	}
+	/**
+	 * @param sys_id the sys_id to set
+	 */
+	public void setSys_id(int sys_id) {
+		this.sys_id = sys_id;
+	}
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	/**
+	 * @return the mobile
+	 */
+	public String getMobile() {
+		return mobile;
+	}
+	/**
+	 * @param mobile the mobile to set
+	 */
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+
+
+	public String getDevice_id() {
+		return device_id;
+	}
+
+	public void setDevice_id(String device_id) {
+		this.device_id = device_id;
+	}
+
+	/**
+	 * @return the pin
+	 */
+	public String getPin() {
+		return pin;
+	}
+	/**
+	 * @param pin the pin to set
+	 */
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+	/**
+	 * @return the role_name
+	 */
+	public String getRole_name() {
+		return role_name;
+	}
+	/**
+	 * @param role_name the role_name to set
+	 */
+	public void setRole_name(String role_name) {
+		this.role_name = role_name;
+	}
+	/**
+	 * @return the status
+	 */
+	public boolean isStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+	/**
+	 * @return the created
+	 */
+	public Date getCreated() {
+		return created;
+	}
+	/**
+	 * @param created the created to set
+	 */
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	/**
+	 * @return the created_by
+	 */
+	public int getCreated_by() {
+		return created_by;
+	}
+	/**
+	 * @param created_by the created_by to set
+	 */
+	public void setCreated_by(int created_by) {
+		this.created_by = created_by;
+	}
+	/**
+	 * @return the updated
+	 */
+	public Date getUpdated() {
+		return updated;
+	}
+	/**
+	 * @param updated the updated to set
+	 */
+	public void setUpdated(Date updated) {
+		this.updated = updated;
+	}
+	/**
+	 * @return the updated_by
+	 */
+	public int getUpdated_by() {
+		return updated_by;
+	}
+	/**
+	 * @param updated_by the updated_by to set
+	 */
+	public void setUpdated_by(int updated_by) {
+		this.updated_by = updated_by;
+	}
+
+
+}

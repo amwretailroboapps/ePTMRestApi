@@ -1,8 +1,11 @@
 package com.ehrs.restapi.Exception;
+import java.time.LocalDateTime;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.ehrs.restapi.*;
+import com.ehrs.restapi.models.ModelLog;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException{
@@ -11,6 +14,10 @@ public class ResourceNotFoundException extends RuntimeException{
 	
 	public ResourceNotFoundException(String level, String message) {
 		super(message);
+		ModelLog log = new ModelLog();
+		log.setLevel(level);
+		log.setMessage(message);
+		log.setTimestamp(LocalDateTime.now());
 		DatabaseLogger.logToDatabase(level, message);
 	}
 }

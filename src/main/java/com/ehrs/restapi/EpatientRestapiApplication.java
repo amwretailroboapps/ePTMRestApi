@@ -14,17 +14,6 @@ import org.springframework.context.annotation.Configuration;
 //@EnableAutoConfiguration
 @SpringBootApplication
 public class EpatientRestapiApplication {
-//extends SpringBootServletInitializer
-//	@GetMapping("/welcome")
-//	public String welcomeMessage()
-//	{
-//		return "Welcome to Electronic Health Record System !";
-//	}
-//	
-//	@Override
-//	public SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-//		return builder.sources(EpatientRestapiApplication.class);
-//    }
 	
 	public static void main(String[] args) {
 		//main class to run
